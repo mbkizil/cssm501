@@ -262,7 +262,7 @@ with open(INPUT_FILE, "r", encoding="utf-8") as fin, open(
     OUTPUT_FILE, "w", encoding="utf-8"
 ) as fout, tqdm(total=25_000_000) as pbar:
     for linedct in p.imap_unordered(check_tweet, fin, chunksize=32):
-        kept_tweets += 1
+        # kept_tweets += 1
         pbar.update(1)
 
         if not linedct["pass"]:
@@ -271,8 +271,8 @@ with open(INPUT_FILE, "r", encoding="utf-8") as fin, open(
         # Parse matched_keywords reliably (could be list or string)
         # This tweet has at least one keyword from each set
         # -> write it to the new JSONL
-        fout.write(json.dumps(linedct["line"], ensure_ascii=False))
-        fout.write("\n")
+        fout.write(linedct["line"])
+        # fout.write("\n")
 
         kept_tweets += 1
 
